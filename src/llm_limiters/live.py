@@ -3,7 +3,7 @@ import asyncio
 import logging
 from collections import deque
 from typing import Dict, Deque, Tuple
-from src.llm_limiters.constants import GEMINI_LIVE_LIMITS
+from .constants import GEMINI_LIVE_LIMITS
 
 logger = logging.getLogger(__name__)
 

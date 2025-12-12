@@ -5,7 +5,7 @@ from threading import Lock
 from typing import List, Dict, Deque, Tuple, Callable, Any
 import re
 import logging
-from src.llm_limiters.constants import GEMINI_API_LIMITS, OPENAI_API_LIMITS
+from .constants import GEMINI_API_LIMITS, OPENAI_API_LIMITS
 
 logger = logging.getLogger(__name__)
 
