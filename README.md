@@ -35,9 +35,7 @@ pip install llm-limiters
 ### Import
 
 ```python
-from llm_limiters import RateLimiter
-from llm_limiters.live import LiveRateLimiter
-from llm_limiters.image import ImageRateLimiter
+from llm_limiters import RateLimiter, LiveRateLimiter, ImageRateLimiter
 ```
 
 ## Text Model Rate Limiting (Gemini + OpenAI)
