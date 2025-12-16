@@ -62,7 +62,7 @@ OPENAI_API_LIMITS = {
 GEMINI_IMAGE_LIMITS = {
     "free": {},
     "tier1": {
-        "gemini-2.5-flash-preview-image": {
+        "gemini-2.5-flash-image": {
             "rpm": 500,
             "tpm": 500_000,
             "rpd": 2_000
@@ -72,17 +72,17 @@ GEMINI_IMAGE_LIMITS = {
             "tpm": 100_000,
             "rpd": 250
         },
-        "imagen-4.0-fast-generate": {
+        "imagen-4.0-fast-generate-001": {
             "rpm": 10,
-            "tpm": 0,     # Imagen → request-based
+            "tpm": 0,   
             "rpd": 70
         },
-        "imagen-4.0-generate": {
+        "imagen-4.0-generate-001": {
             "rpm": 10,
             "tpm": 0,
             "rpd": 70
         },
-        "imagen-4.0-ultra-generate": {
+        "imagen-4.0-ultra-generate-001": {
             "rpm": 5,
             "tpm": 0,
             "rpd": 30
@@ -92,6 +92,7 @@ GEMINI_IMAGE_LIMITS = {
     "tier2": {},
     "tier3": {}
 }
+
 
 OPENAI_IMAGE_LIMITS = {
     "free": {
