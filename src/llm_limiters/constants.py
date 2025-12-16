@@ -56,3 +56,39 @@ OPENAI_API_LIMITS = {
         "gpt-4o": {"rpm": 80, "tpm": 2000000, "rpd": float("inf")},
     },
 }
+
+# constants_image.py
+
+GEMINI_IMAGE_LIMITS = {
+    "free": {},
+    "tier1": {
+        "gemini-2.5-flash-preview-image": {
+            "rpm": 500,
+            "tpm": 500_000,
+            "rpd": 2_000
+        },
+        "gemini-3-pro-image": {
+            "rpm": 20,
+            "tpm": 100_000,
+            "rpd": 250
+        },
+        "imagen-4.0-fast-generate": {
+            "rpm": 10,
+            "tpm": 0,     # Imagen → request-based
+            "rpd": 70
+        },
+        "imagen-4.0-generate": {
+            "rpm": 10,
+            "tpm": 0,
+            "rpd": 70
+        },
+        "imagen-4.0-ultra-generate": {
+            "rpm": 5,
+            "tpm": 0,
+            "rpd": 30
+        }
+    },
+
+    "tier2": {},
+    "tier3": {}
+}
