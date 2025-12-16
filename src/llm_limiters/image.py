@@ -4,21 +4,20 @@ import time
 from collections import deque
 from threading import Lock
 from typing import Dict
-from .constants import GEMINI_IMAGE_LIMITS
+from .constants import GEMINI_IMAGE_LIMITS, OPENAI_IMAGE_LIMITS
 from .core import RateLimitExceededError, ModelNotFoundError
 
 
 class ImageRateLimiter:
-    def __init__(self, tier: str = "tier1", custom_limits: Dict[str, Dict] = None):
-        if tier not in GEMINI_IMAGE_LIMITS:
+    def __init__(self, tier="tier1", custom_limits=None):
+        if tier not in GEMINI_IMAGE_LIMITS and tier not in OPENAI_IMAGE_LIMITS:
             raise ValueError(f"Unknown tier '{tier}'")
-        
-        if tier == "free":
-            raise RuntimeError("Image models require billing (Tier-1+)")
 
         self.tier = tier
+
         self.limits = {
-            **GEMINI_IMAGE_LIMITS[tier],
+            **GEMINI_IMAGE_LIMITS.get(tier, {}),
+            **OPENAI_IMAGE_LIMITS.get(tier, {}),
             **(custom_limits or {})
         }
 
@@ -37,24 +36,30 @@ class ImageRateLimiter:
         if model not in self.limits:
             raise ModelNotFoundError(model)
 
-        now = time.time()
-        self._prune(model, now)
+        with self._lock:
+            now = time.time()
+            self._prune(model, now)
 
-        cfg = self.limits[model]
+            cfg = self.limits[model]
 
-        if len(self.request_logs[model]) >= cfg["rpm"]:
-            return False
-
-        if cfg["tpm"] > 0:
-            used = sum(t for _, t in self.token_logs[model])
-            if used >= cfg["tpm"]:
+            # RPM
+            if len(self.request_logs[model]) >= cfg["rpm"]:
                 return False
 
-        day_ago = now - 86400
-        if sum(1 for ts in self.request_logs[model] if ts > day_ago) >= cfg["rpd"]:
-            return False
+            # TPM (OpenAI images)
+            if cfg.get("tpm", 0) > 0:
+                used_tokens = sum(t for _, t in self.token_logs[model])
+                if used_tokens >= cfg["tpm"]:
+                    return False
 
-        return True
+            # RPD (Gemini images)
+            if cfg.get("rpd", 0) > 0:
+                day_ago = now - 86400
+                if sum(1 for ts in self.request_logs[model] if ts > day_ago) >= cfg["rpd"]:
+                    return False
+
+            return True
+
 
     def limit(self, model_priority):
         def decorator(fn):

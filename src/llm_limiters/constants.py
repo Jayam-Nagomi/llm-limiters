@@ -92,3 +92,74 @@ GEMINI_IMAGE_LIMITS = {
     "tier2": {},
     "tier3": {}
 }
+
+OPENAI_IMAGE_LIMITS = {
+    "free": {
+        # OpenAI image models are NOT available on free tier
+    },
+
+    "tier1": {
+        "gpt-image-1": {
+            "rpm": 5,
+            "tpm": 100_000,
+            "rpd": 0  # OpenAI does not enforce RPD
+        },
+        "gpt-image-1-mini": {
+            "rpm": 5,
+            "tpm": 100_000,
+            "rpd": 0
+        }
+    },
+
+    "tier2": {
+        "gpt-image-1": {
+            "rpm": 20,
+            "tpm": 250_000,
+            "rpd": 0
+        },
+        "gpt-image-1-mini": {
+            "rpm": 20,
+            "tpm": 250_000,
+            "rpd": 0
+        }
+    },
+
+    "tier3": {
+        "gpt-image-1": {
+            "rpm": 50,
+            "tpm": 800_000,
+            "rpd": 0
+        },
+        "gpt-image-1-mini": {
+            "rpm": 50,
+            "tpm": 800_000,
+            "rpd": 0
+        }
+    },
+
+    "tier4": {
+        "gpt-image-1": {
+            "rpm": 150,
+            "tpm": 3_000_000,
+            "rpd": 0
+        },
+        "gpt-image-1-mini": {
+            "rpm": 150,
+            "tpm": 3_000_000,
+            "rpd": 0
+        }
+    },
+
+    "tier5": {
+        "gpt-image-1": {
+            "rpm": 250,
+            "tpm": 8_000_000,
+            "rpd": 0
+        },
+        "gpt-image-1-mini": {
+            "rpm": 250,
+            "tpm": 8_000_000,
+            "rpd": 0
+        }
+    }
+}
