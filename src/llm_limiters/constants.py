@@ -163,3 +163,175 @@ OPENAI_IMAGE_LIMITS = {
         }
     }
 }
+
+# OpenAI Audio / TTS limits
+OPENAI_AUDIO_LIMITS = {
+    "free": {
+        "tts-1": {
+            "rpm": 3,
+            "tpm": 0,
+            "rpd": 200
+        }
+    },
+
+    "tier1": {
+        "tts-1": {
+            "rpm": 500,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "tts-1-hd": {
+            "rpm": 500,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "gpt-4o-mini-tts": {
+            "rpm": 500,
+            "tpm": 50_000,
+            "rpd": 0
+        }
+    },
+
+    "tier2": {
+        "tts-1": {
+            "rpm": 2_500,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "tts-1-hd": {
+            "rpm": 2_500,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "gpt-4o-mini-tts": {
+            "rpm": 2_000,
+            "tpm": 150_000,
+            "rpd": 0
+        }
+    },
+
+    "tier3": {
+        "tts-1": {
+            "rpm": 5_000,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "tts-1-hd": {
+            "rpm": 5_000,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "gpt-4o-mini-tts": {
+            "rpm": 5_000,
+            "tpm": 500_000,
+            "rpd": 0
+        }
+    },
+
+    "tier4": {
+        "tts-1": {
+            "rpm": 7_500,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "tts-1-hd": {
+            "rpm": 7_500,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "gpt-4o-mini-tts": {
+            "rpm": 10_000,
+            "tpm": 2_000_000,
+            "rpd": 0
+        }
+    },
+
+    "tier5": {
+        "tts-1": {
+            "rpm": 10_000,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "tts-1-hd": {
+            "rpm": 10_000,
+            "tpm": 0,
+            "rpd": 0
+        },
+        "gpt-4o-mini-tts": {
+            "rpm": 10_000,
+            "tpm": 8_000_000,
+            "rpd": 0
+        }
+    }
+}
+
+# Gemini audio / TTS / native-audio models
+
+GEMINI_AUDIO_LIMITS = {
+    "free": {
+        "gemini-2.5-flash-native-audio-dialog": {
+            "rpm": float("inf"), 
+            "tpm": 1_000_000,  
+            "rpd": float("inf") 
+        },
+        "gemini-2.5-flash-tts": {
+            "rpm": 3,
+            "tpm": 10_000,
+            "rpd": 10
+        }
+    },
+
+    "tier1": {
+        "gemini-2.5-flash-native-audio-dialog": {
+            "rpm": float("inf"),
+            "tpm": 1_000_000,
+            "rpd": float("inf")
+        },
+        "gemini-2.5-flash-tts": {
+            "rpm": 10,
+            "tpm": 10_000,
+            "rpd": 100
+        },
+        "gemini-2.5-pro-tts": {
+            "rpm": 10,
+            "tpm": 10_000,
+            "rpd": 50
+        }
+    },
+
+    "tier2": {
+        "gemini-2.5-flash-native-audio-dialog": {
+            "rpm": float("inf"),
+            "tpm": 4_000_000,
+            "rpd": float("inf")
+        },
+        "gemini-2.5-flash-tts": {
+            "rpm": 50,
+            "tpm": 10_000,
+            "rpd": 500
+        },
+        "gemini-2.5-pro-tts": {
+            "rpm": 50,
+            "tpm": 10_000,
+            "rpd": 250
+        }
+    },
+
+    "tier3": {
+        "gemini-2.5-flash-native-audio-dialog": {
+            "rpm": float("inf"),
+            "tpm": 10_000_000,
+            "rpd": float("inf")
+        },
+        "gemini-2.5-flash-tts": {
+            "rpm": 100,
+            "tpm": 10_000,
+            "rpd": float("inf")
+        },
+        "gemini-2.5-pro-preview-tts": {
+            "rpm": 100,
+            "tpm": 10_000,
+            "rpd": float("inf")
+        }
+    }
+}
