@@ -108,6 +108,59 @@ def generate_image(prompt: str, model_name: str):
 - RPD enforced for Gemini / Imagen models
 - Automatic cooldown on quota errors
 
+## Audio / TTS Rate Limiting
+
+Supports **OpenAI and Gemini audio models**, including text-to-speech and native audio generation.
+
+### Supported Models
+
+**OpenAI**
+- `tts-1`
+- `tts-1-hd`
+- `gpt-4o-mini-tts`
+
+**Gemini**
+- `gemini-2.5-flash-native-audio`
+- `gemini-2.5-flash-preview-tts`
+- `gemini-2.5-pro-preview-tts`
+
+### Create an audio limiter
+
+```python
+from llm_limiters.audio import AudioRateLimiter
+
+audio_limiter = AudioRateLimiter(tier="tier1")
+```
+
+### Use with model fallback (Gemini + OpenAI)
+
+```python
+@audio_limiter.limit([
+    "gemini-2.5-flash-native-audio",
+    "gpt-4o-mini-tts",
+    "gemini-2.5-flash-preview-tts",
+    "tts-1"
+])
+def generate_audio(text: str, model_name: str):
+    if model_name.startswith("gemini"):
+        return gemini.audio.generate(
+            model=model_name,
+            input=text
+        )
+    else:
+        return openai.audio.speech.create(
+            model=model_name,
+            input=text,
+            voice="alloy"
+        )
+```
+
+### Enforced Limits
+- RPM for all audio models
+- TPM for token-based TTS models (e.g. gpt-4o-mini-tts)
+- RPD where applicable (e.g. free-tier models)
+- Automatic cooldown on provider rate-limit errors
+
 ## Live / Streaming Rate Limiter (Async)
 
 ### Designed for:
